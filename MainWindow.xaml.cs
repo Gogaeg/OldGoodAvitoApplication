@@ -1,28 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OldGoodAvitoApplication
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            UpdateLoginButton();
+        }
+
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentUser.User == null)
+            {
+                // Если пользователь не авторизован, перейти на страницу авторизации
+                MainFrame.Navigate(new AuthPage());
+            }
+            else
+            {
+                // Если пользователь авторизован, перейти на страницу профиля
+                MainFrame.Navigate(new ProfilePage()); // Предполагается, что есть страница ProfilePage
+            }
+        }
+
+        public void UpdateLoginButton()
+        {
+            if (CurrentUser.User != null)
+            {
+                LogInButton.Content = "Профиль";
+            }
+            else
+            {
+                LogInButton.Content = "Войти";
+            }
         }
     }
 }
+

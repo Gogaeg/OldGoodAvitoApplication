@@ -8,10 +8,14 @@
         Title="OldGoodAvitoApplication" Height="1000" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Width="322">
+            <Button x:Name="LogInButton" Width="270" FontSize="32" Height="53" Content="Войти" Click="LogInButton_Click"/>
+        </StackPanel>
+
         <Frame Source="Adverts.xaml" Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
-    
+
 </Window>

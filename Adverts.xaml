@@ -4,190 +4,162 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:OldGoodAvitoApplication"
+      xmlns:conv="clr-namespace:OldGoodAvitoApplication.Converters" 
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1000"
       Title="Adverts">
 
+    <Page.Resources>
+        <conv:PhotoConverter x:Key="PhotoConverter"/>
+    </Page.Resources>
+
     <Grid Background="Gray">
-        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="310"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical" >
+            <TextBox x:Name="NameSearch" TextChanged="NameSearch_TextChanged" Width="270" Height="46" FontSize="32" />
+            <TextBlock Text="Город:" FontSize="32" TextAlignment="Left" HorizontalAlignment="Left"   Width="270" Height="46"/>
+            <ComboBox  x:Name="CitySearch" FontSize="32"  SelectionChanged="CitySearch_SelectionChanged" Height="55" Width="270" VerticalAlignment="Bottom" HorizontalAlignment="Left" DisplayMemberPath=""/>
+            <TextBlock Text="Статус:" FontSize="32"  TextAlignment="Left" HorizontalAlignment="Left"  Width="270" Height="46"/>
+            <ComboBox FontSize="32" x:Name="StatusSearch" SelectionChanged="StatusSearch_SelectionChanged" Height="55" Width="270" DisplayMemberPath="StatusName"/>
+            <TextBlock Text="Категория:" FontSize="32" TextAlignment="Left" HorizontalAlignment="Left"  Width="270" Height="46"/>
+            <ComboBox FontSize="32" x:Name="CategorySearch" SelectionChanged="CategorySearch_SelectionChanged" Height="55" Width="270" DisplayMemberPath="CategoryName"/>
+            <TextBlock Text="Тип:" TextAlignment="Left" FontSize="32"  Width="300" Height="46"/>
+            <ComboBox FontSize="32" x:Name="TypeSearch" Height="55" Width="270" SelectionChanged="TypeSearch_SelectionChanged" DisplayMemberPath="TypeName"/>
+            <Button x:Name="ClearButton" Content="Очистить" Click="ClearButton_Click" Width="270" FontSize="32" Height="53" VerticalContentAlignment="Top"/>
+            <Image Source="Resources/logo1.png"/>
+        </StackPanel>
 
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="310"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <ListView Name="ListAdverts" ItemsSource="{Binding AdvertsList}" Grid.Row="1" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Left" Width="Auto">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Left" Width="Auto"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
 
-            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical" >
-                <TextBox x:Name="NameSearch" TextChanged="NameSearch_TextChanged" Width="270" Height="46" FontSize="32"/>
-                <TextBlock Text="Город:" FontSize="32" TextAlignment="Left" HorizontalAlignment="Left"   Width="270" Height="46"/>
-                <ComboBox  x:Name="CitySearch" FontSize="32"  SelectionChanged="CitySearch_SelectionChanged" Height="55" Width="270" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <TextBlock Text="Статус:" FontSize="32"  TextAlignment="Left" HorizontalAlignment="Left"  Width="270" Height="46"/>
-                <ComboBox FontSize="32" x:Name="StatusSearch" SelectionChanged="StatusSearch_SelectionChanged" Height="55" Width="270"/>
-                <TextBlock Text="Категория:" FontSize="32" TextAlignment="Left" HorizontalAlignment="Left"  Width="270" Height="46"/>
-                <ComboBox FontSize="32" x:Name="CategorySearch" SelectionChanged="CategorySearch_SelectionChanged" Height="55" Width="270"/>
-                <TextBlock Text="Тип:" TextAlignment="Left" FontSize="32"  Width="300" Height="46"/>
-                <ComboBox FontSize="32" x:Name="TypeSearch" Height="55" Width="270" SelectionChanged="TypeSearch_SelectionChanged"/>
-                <Button x:Name="ClearButton" Content="Очистить" Click="ClearButton_Click" Width="270" FontSize="32" Height="53" VerticalContentAlignment="Top"/>
-                <Image Source="Resources/logo1.png"/>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="36"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-            </StackPanel>
+                        <TextBlock Text="{Binding Title}"
+                                   VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" 
+                                   Width="450" Grid.Row="0" TextWrapping="Wrap"
+                                   FontSize="35" FontWeight="Bold"/>
 
-
-            <ListView Name="ListAdverts" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Left" Width="auto" Grid.Column="1">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical" HorizontalAlignment="Left" Width="auto">
-
-                        </WrapPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
+                        <Grid Width="Auto" Grid.Row="2">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="36"/>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="{Binding Title}"
-                                           VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" 
-                                           Width="450" Grid.Row="0" TextWrapping="Wrap"
-                                           FontSize="35" FontWeight="Bold"
-                                />
+                            <Image Width="500" Grid.Row="1" Grid.Column="0" Stretch="UniformToFill" HorizontalAlignment="Left">
+                                <Image.Source>
+                                    <Binding Path="photo" Converter="{StaticResource PhotoConverter}">
+                                        <!-- Исправлено на "Photo" -->
+                                        <Binding.TargetNullValue>
+                                            <BitmapImage UriSource="C:\Images\default.png"/>
+                                            <!-- Абсолютный путь к default.png -->
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
 
-                            <Grid Width="auto" Grid.Row="2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Description}" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" Width="800" Height="400" Grid.Row="1" TextWrapping="Wrap" FontSize="18" FontWeight="Bold"/>
 
-                                <Image Width="500" Grid.Row="1" Grid.Column="0" Stretch="UniformToFill" HorizontalAlignment="Left">
+                            <!-- Метки и значения -->
+                            <TextBlock Text="Город: "
+                                       VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                       Width="450" Grid.Row="2" TextWrapping="Wrap" Grid.Column="0"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Адрес: "
+                                       VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                       Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="0"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Цена: "
+                                       VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                       Width="450" Grid.Row="4" TextWrapping="Wrap" Grid.Column="0"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Тип: "
+                                       VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                       Width="450" Grid.Row="5" TextWrapping="Wrap" Grid.Column="0"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Статус: "
+                                       VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                       Width="450" Grid.Row="6" TextWrapping="Wrap" Grid.Column="0"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Категория: "
+                                       VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                       Width="450" Grid.Row="7" TextWrapping="Wrap" Grid.Column="0"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Дата публикации: "
+                                       VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                       Width="450" Grid.Row="8" TextWrapping="Wrap" Grid.Column="0"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <!-- Остальные метки и значения аналогично -->
 
-                                    <Image.Source>
-
-                                        <Binding Path="photo">
-
-                                            <Binding.TargetNullValue>
-                                                <ImageSource>/Resources/default.png</ImageSource>
-
-                                            </Binding.TargetNullValue>
-
-                                        </Binding>
-
-                                    </Image.Source>
-
-                                </Image>
-
-                                <TextBlock Text="{Binding Description}" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" Width="800" Height="400" Grid.Row="1" TextWrapping="Wrap" FontSize="18" FontWeight="Bold">
-
-                                </TextBlock>
-
-                                <TextBlock Text="Город: "
-                                VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-                                Width="450" Grid.Row="2" TextWrapping="Wrap" Grid.Column="0"
-                                FontSize="18" FontWeight="Bold"
-                                            />
-
-
-                                <TextBlock Text="Адрес: "
-                                VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-                                Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="0"
-                                FontSize="18" FontWeight="Bold"
-                                            />
-
-                                <TextBlock Text="Цена: "
-                                VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-                                Width="450" Grid.Row="4" TextWrapping="Wrap" Grid.Column="0"
-                                FontSize="18" FontWeight="Bold"
-                                            />
-
-                                <TextBlock Text="Тип: "
-                                VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-                                Width="450" Grid.Row="5" TextWrapping="Wrap" Grid.Column="0"
-                                FontSize="18" FontWeight="Bold"
-                                            />
-
-                                <TextBlock Text="Статус: "
-                                VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-                                Width="450" Grid.Row="6" TextWrapping="Wrap" Grid.Column="0"
-                                FontSize="18" FontWeight="Bold"
-                                            />
-
-                                <TextBlock Text="Категория: "
-                                VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-                                Width="450" Grid.Row="7" TextWrapping="Wrap" Grid.Column="0"
-                                FontSize="18" FontWeight="Bold"
-                                            />
-                                <TextBlock Text="Дата публикации: "
-                                VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-                                Width="450" Grid.Row="8" TextWrapping="Wrap" Grid.Column="0"
-                                FontSize="18" FontWeight="Bold"
-                                            />
-
-                                <TextBlock Text="{Binding PublicationDate, StringFormat=' {0:dd.MM.yyyy}'}" 
-                                VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                Width="450" Grid.Row="8" TextWrapping="Wrap"
-                                FontSize="18" FontWeight="Bold" Grid.Column="3"
-                                />
-
-                                <TextBlock Text="{Binding Categories.CategoryName}"
-                                VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                Width="450" Grid.Row="7" TextWrapping="Wrap"
-                                FontSize="18" FontWeight="Bold" Grid.Column="3"
-                                />
-
-                                <TextBlock Text="{Binding AdStatuses.StatusName}"
-                                VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                Width="450" Grid.Row="6" TextWrapping="Wrap"
-                                FontSize="18" FontWeight="Bold" Grid.Column="3"
-                                />
-
-                                <TextBlock Text="{Binding Types.TypeName}"
-                                VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                Width="450" Grid.Row="5" TextWrapping="Wrap"
-                                FontSize="18" FontWeight="Bold" Grid.Column="3"
-                                />
-
-                                <TextBlock Text="{Binding City}"
-                                           VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                           Width="450" Grid.Row="2" TextWrapping="Wrap" Grid.Column="3"
-                                           FontSize="18" FontWeight="Bold"
-                                            />
-                                <TextBlock Text="{Binding Address}"
-                                            VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                            Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="3"
-                                            FontSize="18" FontWeight="Bold"
-                                            />
-                                <TextBlock Text="{Binding Price}"
-                                            VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                            Width="450" Grid.Row="4" TextWrapping="Wrap"
-                                            FontSize="18" FontWeight="Bold" Grid.Column="3"
-                                            />
-
-                            </Grid>
+                            <!-- Значения -->
+                            <TextBlock Text="{Binding PublicationDate, StringFormat=' {0:dd.MM.yyyy}'}" 
+                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+                                       Width="450" Grid.Row="8" TextWrapping="Wrap"
+                                       FontSize="18" FontWeight="Bold" Grid.Column="3"/>
+                            <TextBlock Text="{Binding Categories.CategoryName}"
+                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+                                       Width="450" Grid.Row="7" TextWrapping="Wrap"
+                                       FontSize="18" FontWeight="Bold" Grid.Column="3"/>
+                            <TextBlock Text="{Binding AdStatuses.StatusName}"
+                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+                                       Width="450" Grid.Row="6" TextWrapping="Wrap"
+                                       FontSize="18" FontWeight="Bold" Grid.Column="3"/>
+                            <TextBlock Text="{Binding Types.TypeName}"
+                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+                                       Width="450" Grid.Row="5" TextWrapping="Wrap"
+                                       FontSize="18" FontWeight="Bold" Grid.Column="3"/>
+                            <TextBlock Text="{Binding City}"
+                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+                                       Width="450" Grid.Row="2" TextWrapping="Wrap" Grid.Column="3"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Address}"
+                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+                                       Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="3"
+                                       FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Price, StringFormat={}{0:C}}"
+                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+                                       Width="450" Grid.Row="4" TextWrapping="Wrap"
+                                       FontSize="18" FontWeight="Bold" Grid.Column="3"/>
                         </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

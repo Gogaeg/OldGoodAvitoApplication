@@ -23,7 +23,7 @@ namespace OldGoodAvitoApplication
                 return;
             }
 
-            using (var context = Entities.GetContext()) // Замените YourDbContext на ваш контекст БД
+            using (var context = new Entities()) // Создаём новый экземпляр контекста
             {
                 var user = context.Users
                                   .FirstOrDefault(u => u.Login == enteredLogin && u.Password == enteredPassword);

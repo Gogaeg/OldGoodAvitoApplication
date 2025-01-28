@@ -60,6 +60,9 @@ namespace OldGoodAvitoApplication
                         Profit = profit,
                         UserAds = userAds
                     };
+
+                    // Обновляем DataContext
+                    this.DataContext = ViewModel;
                 }
                 else
                 {
@@ -81,6 +84,20 @@ namespace OldGoodAvitoApplication
             {
                 MessageBox.Show($"Ошибка при навигации назад: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        // Обработчик нажатия кнопки "Создать объявление"
+        private void CreateAdButton_Click(object sender, RoutedEventArgs e)
+        {
+            CreateAdWindow createAdWindow = new CreateAdWindow();
+            bool? result = createAdWindow.ShowDialog();
+
+            if (result == true)
+            {
+                // Объявление успешно создано, обновляем список
+                LoadUserProfile();
+            }
+            // Если result == false или null, пользователь отменил создание объявления
         }
     }
 

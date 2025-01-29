@@ -19,8 +19,11 @@ namespace OldGoodAvitoApplication.Resources
             : base("name=Entities")
         {
         }
-
-        
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
     
         public virtual DbSet<Ads> Ads { get; set; }
         public virtual DbSet<AdStatuses> AdStatuses { get; set; }

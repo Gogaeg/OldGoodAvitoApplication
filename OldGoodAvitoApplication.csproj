@@ -75,6 +75,9 @@
     </Compile>
     <Compile Include="CurrentUser.cs" />
     <Compile Include="Converters\PhotoConverter.cs" />
+    <Compile Include="EditAdWindow.xaml.cs">
+      <DependentUpon>EditAdWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditAdWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

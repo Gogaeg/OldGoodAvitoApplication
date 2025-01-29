@@ -7,10 +7,10 @@
       <Diagram DiagramId="a760bf19e82e45f081970714a04d7008" Name="Diagram1">
         <EntityTypeShape EntityType="UP2_Model.Ads" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="UP2_Model.AdStatuses" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="UP2_Model.Categories" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="UP2_Model.sysdiagrams" Width="1.5" PointX="6.625" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UP2_Model.Types" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UP2_Model.Users" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP2_Model.Categories" Width="1.5" PointX="6.125" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP2_Model.sysdiagrams" Width="1.5" PointX="8.875" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP2_Model.Types" Width="1.5" PointX="4.875" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP2_Model.Users" Width="1.5" PointX="7" PointY="3" IsExpanded="true" />
         <AssociationConnector Association="UP2_Model.FK__Ads__CategoryID__31EC6D26" ManuallyRouted="false" />
         <AssociationConnector Association="UP2_Model.FK__Ads__StatusID__33D4B598" ManuallyRouted="false" />
         <AssociationConnector Association="UP2_Model.FK__Ads__TypeID__32E0915F" ManuallyRouted="false" />

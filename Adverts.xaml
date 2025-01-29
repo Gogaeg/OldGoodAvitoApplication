@@ -85,10 +85,10 @@
                             <Image Width="500" Grid.Row="1" Grid.Column="0" Stretch="UniformToFill" HorizontalAlignment="Left">
                                 <Image.Source>
                                     <Binding Path="photo" Converter="{StaticResource PhotoConverter}">
-                                        <!-- Исправлено на "Photo" -->
+                                        
                                         <Binding.TargetNullValue>
                                             <BitmapImage UriSource="C:\Images\default.png"/>
-                                            <!-- Абсолютный путь к default.png -->
+                                           
                                         </Binding.TargetNullValue>
                                     </Binding>
                                 </Image.Source>
@@ -96,7 +96,7 @@
 
                             <TextBlock Text="{Binding Description}" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" Width="800" Height="400" Grid.Row="1" TextWrapping="Wrap" FontSize="18" FontWeight="Bold"/>
 
-                            <!-- Метки и значения -->
+                            
                             <TextBlock Text="Город: "
                                        VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
                                        Width="450" Grid.Row="2" TextWrapping="Wrap" Grid.Column="0"
@@ -125,9 +125,7 @@
                                        VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
                                        Width="450" Grid.Row="8" TextWrapping="Wrap" Grid.Column="0"
                                        FontSize="18" FontWeight="Bold"/>
-                            <!-- Остальные метки и значения аналогично -->
-
-                            <!-- Значения -->
+                            
                             <TextBlock Text="{Binding PublicationDate, StringFormat=' {0:dd.MM.yyyy}'}" 
                                        VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
                                        Width="450" Grid.Row="8" TextWrapping="Wrap"
@@ -152,10 +150,11 @@
                                        VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
                                        Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="3"
                                        FontSize="18" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Price, StringFormat={}{0:C}}"
-                                       VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
-                                       Width="450" Grid.Row="4" TextWrapping="Wrap"
-                                       FontSize="18" FontWeight="Bold" Grid.Column="3"/>
+                            <TextBlock Text="{Binding Price, StringFormat={}{0} ₽}"
+           VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
+           Width="450" Grid.Row="4" TextWrapping="Wrap"
+           FontSize="18" FontWeight="Bold" Grid.Column="3"/>
+
                         </Grid>
                     </Grid>
                 </DataTemplate>

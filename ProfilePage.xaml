@@ -24,7 +24,7 @@
         <!-- Row 0: Информация о пользователе и Кнопка "Назад" -->
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20">
             <!-- Кнопка "Назад" -->
-            <Button Content="Назад" Width="100" Height="30" HorizontalAlignment="Left" Click="BackButton_Click" Margin="0,0,0,20"/>
+            <Button Content="Назад" Width="111" Height="35" HorizontalAlignment="Left" Click="BackButton_Click" Margin="0,0,0,20"/>
 
             <TextBlock Text="Профиль пользователя" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
 
@@ -40,11 +40,11 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="Прибыль: " FontWeight="Bold" Width="150"/>
-                <TextBlock Text="{Binding Profit, StringFormat={}{0:C}}" />
+                <TextBlock Text="{Binding Profit, StringFormat={}{0} ₽}" />
             </StackPanel>
 
             <!-- Кнопка "Создать объявление" -->
-            <Button Content="Создать объявление" Width="200" Height="40" 
+            <Button Content="Создать объявление" Width="200" Height="40" FontSize="16"
                     HorizontalAlignment="Left" 
                     Click="CreateAdButton_Click" 
                     Margin="0,20,0,0"/>
@@ -54,11 +54,22 @@
         <Grid Grid.Row="1" Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <!-- Чекбокс -->
                 <RowDefinition Height="*"/>
+                <!-- ListView -->
             </Grid.RowDefinitions>
 
+            <!-- Чекбокс "Показать только завершенные" -->
+            <CheckBox x:Name="ShowOnlyCompletedCheckBox"
+                      Content="Показать только завершенные" 
+                      FontSize="16" 
+                      Margin="0,0,0,10" 
+                      Checked="ShowOnlyCompleted_Checked" 
+                      Unchecked="ShowOnlyCompleted_Unchecked"
+                      Grid.Row="0"/>
+
             <!-- Заголовок -->
-            <TextBlock Text="Ваши объявления" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="0"/>
+            <TextBlock Text="Ваши объявления" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="1"/>
 
             <!-- ListView -->
             <ListView Name="UserAdvertsListView" ItemsSource="{Binding UserAds}" 
@@ -113,7 +124,7 @@
                                     <Image.Source>
                                         <Binding Path="photo" Converter="{StaticResource PhotoConverter}">
                                             <Binding.TargetNullValue>
-                                                <BitmapImage UriSource="C:\Images\default.png"/>
+                                                <BitmapImage UriSource="Resources/default.png"/>
                                             </Binding.TargetNullValue>
                                         </Binding>
                                     </Image.Source>
@@ -130,30 +141,30 @@
                                            Width="450" Grid.Row="2" TextWrapping="Wrap" Grid.Column="0"
                                            FontSize="18" FontWeight="Bold"/>
                                 <TextBlock Text="Адрес: "
-           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-           Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="0"
-           FontSize="18" FontWeight="Bold"/>
+                                           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                           Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="0"
+                                           FontSize="18" FontWeight="Bold"/>
                                 <TextBlock Text="Цена: "
-           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-           Width="450" Grid.Row="4" TextWrapping="Wrap" Grid.Column="0"
-           FontSize="18" FontWeight="Bold"/>
+                                           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                           Width="450" Grid.Row="4" TextWrapping="Wrap" Grid.Column="0"
+                                           FontSize="18" FontWeight="Bold"/>
                                 <TextBlock Text="Тип: "
-           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-           Width="450" Grid.Row="5" TextWrapping="Wrap" Grid.Column="0"
-           FontSize="18" FontWeight="Bold"/>
+                                           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                           Width="450" Grid.Row="5" TextWrapping="Wrap" Grid.Column="0"
+                                           FontSize="18" FontWeight="Bold"/>
                                 <TextBlock Text="Статус: "
-           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-           Width="450" Grid.Row="6" TextWrapping="Wrap" Grid.Column="0"
-           FontSize="18" FontWeight="Bold"/>
+                                           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                           Width="450" Grid.Row="6" TextWrapping="Wrap" Grid.Column="0"
+                                           FontSize="18" FontWeight="Bold"/>
                                 <TextBlock Text="Категория: "
-           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-           Width="450" Grid.Row="7" TextWrapping="Wrap" Grid.Column="0"
-           FontSize="18" FontWeight="Bold"/>
+                                           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                           Width="450" Grid.Row="7" TextWrapping="Wrap" Grid.Column="0"
+                                           FontSize="18" FontWeight="Bold"/>
                                 <TextBlock Text="Дата публикации: "
-           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
-           Width="450" Grid.Row="8" TextWrapping="Wrap" Grid.Column="0"
-           FontSize="18" FontWeight="Bold"/>
-                                <!-- Аналогично добавьте остальные метки -->
+                                           VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Right"
+                                           Width="450" Grid.Row="8" TextWrapping="Wrap" Grid.Column="0"
+                                           FontSize="18" FontWeight="Bold"/>
+                                <!-- Остальные метки и значения аналогично -->
 
                                 <!-- Значения -->
                                 <TextBlock Text="{Binding PublicationDate, StringFormat=' {0:dd.MM.yyyy}'}" 
@@ -180,11 +191,19 @@
                                            VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
                                            Width="450" Grid.Row="3" TextWrapping="Wrap" Grid.Column="2"
                                            FontSize="18" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Price, StringFormat={}{0:C}}"
+                                <TextBlock Text="{Binding Price, StringFormat={}{0} ₽}"
                                            VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Left"
                                            Width="450" Grid.Row="4" TextWrapping="Wrap"
                                            FontSize="18" FontWeight="Bold" Grid.Column="2"/>
                             </Grid>
+
+                            <!-- Контекстное меню -->
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Удалить" Click="DeleteAdMenuItem_Click"/>
+                                    <MenuItem Header="Редактировать" Click="EditAdMenuItem_Click"/>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
